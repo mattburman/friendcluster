@@ -1,0 +1,11 @@
+{
+  "name": "friendcluster",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Matt Burman",
+  "license": "MIT"
+}
