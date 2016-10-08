@@ -6,6 +6,9 @@ const People = function() {
 
 	this.addPerson = person => this.list.push(person);
 	this.displayPeople = () => console.log(this.list);
+	this.changeChoice = (id, response) => {
+		this.list[id].changeResponse(response);
+	};
 	this.addRandomResponses = () => {
 		this.list.forEach(person => {
 			const choice = OPTIONS[Math.floor(Math.random()*OPTIONS.length)];
