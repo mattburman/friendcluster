@@ -35,24 +35,36 @@ function People() {
 			});
 		});
 	}
+	this.movePeople = () => {
+		const listCopy = JSON.parse(JSON.stringify(this.list));
+
+		listCopy.forEach(mainPerson => {
+			const xVec = listCopy.reduce((prev, person) => prev + person.x - mainPerson.x, 0);
+			const yVec = listCopy.reduce((prev, person) => prev + person.y - mainPerson.y, 0);
+
+			const scoreSum = listCopy.reduce((prev, person) => prev + mainPerson.scores[person.id], 0);
+
+			const numOthers = listCopy.length - 1;
+			this.list[mainPerson.id].x = (scoreSum * xVec) / (numOthers*numOthers);
+			this.list[mainPerson.id].y = (scoreSum * yVec) / (numOthers*numOthers);
+		});
+	};
 }
 
+/*
 const people = new People();
-
-people.displayPeople();
 
 let id = 0;
 for (let i = 0.1; i < 1; i+=0.1) {
-	for (let j = 0.1; j < 1; j+=0.1) people.addPerson(new Person(id++, i, j));
+	for (let j = 0.1; j < 1; j += 0.1) people.addPerson(new Person(id++, i, j));
 }
 
-people.displayPeople();
-
-console.log(people.list.length);
-
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 1; i++) {
 	people.addRandomResponses();
 	people.addScoresToLastResponses();
+	people.movePeople();
 }
 people.displayPeople();
+
+*/
 
