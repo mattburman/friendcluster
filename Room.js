@@ -10,7 +10,9 @@ const Room = function(name, wss) {
 	this.people = new People();
 	id += 1;
 	this.addPerson = name => {
+		console.log('people list length: ' + this.people.list.length);
 		this.people.addPerson(name, id, Math.random(), Math.random());
+		console.log('after people list length: ' + this.people.list.length);
 		return id;
 	}
 	this.changeChoice = this.people.changeChoice;
