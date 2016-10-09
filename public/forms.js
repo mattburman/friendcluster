@@ -10,7 +10,8 @@ const UI = {
 };
 
 var URL = '/gary/join';
-const sub = 'ws';
+const sub = 'ws.';
+const WS_PORT = "";
 console.log('forms');
 
 const conn = {};
@@ -39,7 +40,7 @@ UI.submitNameBtn.click(function(ev) {
 		UI.votingWrapper.show();
 		const id = data.id;
 
-		conn.ws = new WebSocket('ws://' + sub + location.hostname + ':8085');
+		conn.ws = new WebSocket('ws://' + sub + location.hostname + WS_PORT);
 
 		console.log(conn.ws);
 		conn.ws.onopen = function() {
