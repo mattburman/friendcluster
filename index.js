@@ -2,27 +2,36 @@ const Room = require('./Room.js');
 
 const express = require('express');
 const app = express();
+const path = require('path');
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(express.static('public'));
+
+app.engine('html', require('ejs').renderFile);
 
 const WebSocketServer = require('ws').Server;
 const wss = new WebSocketServer({ port: 8085 });
 
 wss.on('connection', ws => {
-	ws.on('choice', data => {
+	ws.on('message', data => {
 		console.log(`[${data.id}][${data.choice}]`);
 	});
 })
 
 const rooms = {};
 
+app.post('/:room/join', function(req, res) {
+	console.log(req.body);
+	console.log(`[${req.params.room}][${req.body.name}]`);
+	if (!rooms[req.params.room]) rooms[req.params.room] = new Room(req.params.room, wss);
+	res.status(200).send({ id: rooms[req.params.room].addPerson(req.body.name) })
+});
+
 app.get('/:room', (req, res) => {
 	if (!rooms[req.params.room]) rooms[req.params.room] = new Room(req.params.room, wss);
 	console.log(rooms[req.params.room]);
-	res.render('/public');
-});
-
-app.get('/:room/id', (req, res) => {
-	console.log(`[${req.params.room}]`);
-	res.status(200).send({ id: rooms[req.params.room].addPerson() })
+	res.sendFile(path.join(__dirname, './public', 'index.html'));
 });
 
 app.post('/:room/choice', (req, res) => {

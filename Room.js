@@ -11,10 +11,12 @@ const Room = function(name, wss) {
 	this.addPerson = () => this.people.addPerson(++id, Math.random(), Math.random()) && id;
 	this.changeChoice = this.people.changeChoice;
 
-	const q = 0;
+	let q = 1;
 	setInterval(
-		() => {
-			wss.clients.forEach(client => client.send({ room: this.name, ev: 'refresh', q: questions[++q%nQuestions]}));
+		function() {
+			console.log('interval' + q);
+			q++;
+			wss.clients.forEach(client => client.send(`{ "room": "${this.name}", "ev": "refresh", "q": "${questions[q%nQuestions]}"}`));
 		},
 		3000
 	);
