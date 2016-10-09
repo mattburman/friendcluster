@@ -28,6 +28,8 @@ app.post('/:room/join', function(req, res) {
 	console.log(`[${req.params.room}][${req.body.name}]`);
 	if (!rooms[req.params.room]) rooms[req.params.room] = new Room(req.params.room, wss);
 	console.log('req.body: ' + JSON.stringify(req.body));
+	console.log(`req.params: ${req.params}`);
+	console.log(`rooms[req.params.room]: ${rooms[req.params.room]}`);
 	const id = rooms[req.params.room].addPerson(req.body.name);
 	console.log('ID@@: ', id);
 	res.status(200).send({ id: id})
