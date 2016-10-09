@@ -10,6 +10,7 @@ const UI = {
 };
 
 var URL = '/gary/join';
+const sub = 'ws';
 console.log('forms');
 
 const conn = {};
@@ -20,7 +21,7 @@ UI.submitNameBtn.click(function(ev) {
 	console.log('click');
 	console.log(UI.field.val());
 	$.ajax({
-			url: "/" + ROOM + "/join",
+		url: "/" + ROOM + "/join",
 			type: "POST",
 			headers: {
 					"Content-Type": "application/json",
@@ -38,7 +39,7 @@ UI.submitNameBtn.click(function(ev) {
 		UI.votingWrapper.show();
 		const id = data.id;
 
-		conn.ws = new WebSocket('ws://' + location.hostname + ':8085');
+		conn.ws = new WebSocket('ws://' + sub + location.hostname + ':8085');
 
 		console.log(conn.ws);
 		conn.ws.onopen = function() {
