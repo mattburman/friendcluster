@@ -21,7 +21,7 @@ wss.on('connection', ws => {
 	ws.on('message', data => {
 		data = JSON.parse(data);
 		console.log(`[${data.id}][${data.choice}]`);
-		rooms[data.room].changeChoice(data.id, data.choice);
+		DEFAULT_ROOM.changeChoice(data.id, data.choice);
 	});
 });
 
