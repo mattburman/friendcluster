@@ -39,6 +39,7 @@ UI.submitNameBtn.click(function(ev) {
 		UI.welcomeWrapper.hide();
 		UI.votingWrapper.show();
 		const id = data.id;
+		console.log(id);
 
 		conn.ws = new WebSocket('ws://' + sub + location.hostname + WS_PORT);
 
@@ -53,6 +54,7 @@ UI.submitNameBtn.click(function(ev) {
 			UI.yesBtn.click(function(ev) {
 				console.log('yes');
 				UI.yesBtn.addClass("selected");
+				console.log(new Choice('yes'));
 				conn.ws.send(JSON.stringify(new Choice('yes')));
 				UI.noBtn.removeClass("selected");
 				UI.idkBtn.removeClass("selected");
