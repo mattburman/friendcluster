@@ -104,23 +104,37 @@ var dataset1=[]
          var numValues = params.length; // Get original dataset's length
          //dataset = []; // Initialize empty array
        //dataset= [{"x": -5, "y": 63, "name": "Matt"}, {"x": 59, "y": 6, "name": "Gary"}];
-       dataset=[];
-dataset=params;
+       dataset1=[];
+dataset1=params;
          // Update scale domains
-         xScale.domain([d3.min(dataset, function(d) {
+         xScale.domain([d3.min(dataset1, function(d) {
              return d.x; // input domain
-         }), d3.max(dataset, function(d) {
+         }), d3.max(dataset1, function(d) {
              return d.x;
          })]);
-         yScale.domain([d3.min(dataset, function(d) {
+         yScale.domain([d3.min(dataset1, function(d) {
              return d.y; // input domain
-         }), d3.max(dataset, function(d) {
+         }), d3.max(dataset1, function(d) {
              return d.y;
          })]);
+  
+  for (var i=0 ;dataset2.length-dataset1.length; i++){
+         svg.selectAll("circle")
+             .data(dataset2)
+             .enter()
+             .append("circle") // Add circle svg
+             .attr("cx", function(d) {
+                 return xScale(d.x); // Circle's X
+             })
+             .attr("cy", function(d) { // Circle's Y
+                 return yScale(d.y);
+             })
+             .attr("r", 2); // radius
+           }
 
          // Update circles
          svg.selectAll("circle")
-             .data(dataset) // Update with new data
+             .data(dataset1) // Update with new data
              .transition() // Transition from old to new
              .duration(1000) // Length of animation
              .each("start", function() { // Start animation
@@ -129,7 +143,7 @@ dataset=params;
                      .attr("r", 5); // Change size
              })
              .delay(function(d, i) {
-                 return i / dataset.length * 500; // Dynamic delay (i.e. each item delays a little longer)
+                 return i / dataset1.length * 500; // Dynamic delay (i.e. each item delays a little longer)
              })
              //.ease("linear")  // Transition easing - default 'variable' (i.e. has acceleration), also: 'circle', 'elastic', 'bounce', 'linear'
              .attr("cx", function(d) {
@@ -161,7 +175,7 @@ dataset=params;
              .call(yAxis);
 
              svg.selectAll("text")
-                 .data(dataset)
+                 .data(dataset1)
                  .transition()
                  .duration(1000)
 
