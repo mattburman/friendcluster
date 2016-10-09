@@ -1,19 +1,7 @@
 
-//dataset = [1, 2, 3, 5, 6, 0];
-//var names=["hello", "mummy", "hello"]
+
  var dataset= [];
- // Setup data
-
- //var numDataPoints = 15; // Number of dummy data points
- //var maxRange = Math.random() * 1000; // Max range of new values
- /*  for (var i = 0; i < numDataPoints; i++) {
-       var newNumber1 = Math.floor(Math.random() * maxRange); // New random integer
-       var newNumber2 = Math.floor(Math.random() * maxRange); // New random integer
-
-
-       dataset.push([newNumber1, newNumber2]); // Add new number to array
-   }*/
- //dataset = [1, 2, 3, 5, 6, 0];
+ 
 
 addArray(dataset);
 
