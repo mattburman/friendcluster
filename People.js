@@ -53,7 +53,6 @@ const People = function() {
 			const numOthers = listCopy.length - 1;
 			console.log("numOthers: ", numOthers);
 			console.log('xVec: ', xVec);
-			console.log('scoreSum: ', scoreSum);
 			if (numOthers === 0) return;
 			this.list[mainPerson.id].x =  xVec / numOthers;
 			this.list[mainPerson.id].y = yVec / numOthers;
