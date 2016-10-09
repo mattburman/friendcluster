@@ -1,35 +1,67 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<!--
+	Binary by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
 <html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="/style.css">
-    <!-- Load D3 from site -->
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-	</head>
-	<body>
-			<div id="welcome-wrapper">
-				<h1>Welcome to Friend Cluster, please enter your name</h1>
 
-				<br>Name:<br>
-				<input id="name" type="text" name="firstname" value="">
-				<button id="submit-name">Submit</button>
-			</div>
-			<div id="voting-wrapper">
-				<h1>Choose.</h1>
-				<h2></h2>
-				<button id="yes">Yes</button>
-				<button id="no">No</button>
-				<button id="idk" class="selected">I don't know</button>
-			</div>
-			<div id="scatter">
+<head>
+	<title>FriendCluster</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+</head>
 
-				<h2>User input values</h2>
-				<p>Welcome to Friend Cluster interface</p>
-				<h4>File will update with each new question</h4>
-			</div>
-			<script src="/jquery-3.1.1.min.js"></script>
-			<script src="/forms.js"></script>
-			<script src="/scatterplot.js"></script>
-	</body>
+<body>
+
+	<!-- Header -->
+	<header id="header">
+		<a href="index.html" class="logo"><strong>Binary</strong> by TEMPLATED</a>
+		<nav>
+			<a href="#menu">Menu</a>
+		</nav>
+	</header>
+
+	<!-- Nav -->
+	<nav id="menu">
+		<ul class="links">
+			<li><a href="index.html">Home</a></li>
+			<li><a href="generic.html">Generic</a></li>
+			<li><a href="elements.html">Elements</a></li>
+		</ul>
+	</nav>
+
+	<!-- Banner -->
+	<section id="banner">
+		<div id="welcome-wrapper">
+			<h1>Welcome to Friend Cluster, please enter your name</h1>
+
+			<br>Name:<br>
+			<input type="text" name="firstname" value="">
+			<button id="submit-name">Submit</button>
+		</div>
+		<div id="voting-wrapper">
+			<h1>Choose.</h1>
+			<button id="yes">Yes</button>
+			<button id="no">No</button>
+			<button id="idk" class="selected">I don't know</button>
+		</div>
+		<script src="/jquery-3.1.1.min.js"></script>
+		<script src="/forms.js"></script>
+	</section>
+
+
+
+
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
 
 </html>
-
