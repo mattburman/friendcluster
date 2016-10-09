@@ -16,7 +16,7 @@ addArray(dataset);
  // Setup settings for graphic
  var canvas_width = 500;
  var canvas_height = 300;
- var padding = 30; // for chart edges
+ var padding = 100; // for chart edges
 
  // Create scale functions
  var xScale = d3.scale.linear() // xScale is width of graphic
