@@ -107,13 +107,12 @@ addArray(dataset);
      .call(yAxis);
 
 var dataset1=[]
- dataset1= [{"x": -5, "y": 63, "name": "Matt"}, {"x": 59, "y": 6, "name": "Gary"}];
-updateArray(dataset1)
+ //dataset1= [{"x": -5, "y": 63, "name": "Matt"}, {"x": 59, "y": 6, "name": "Gary"}];
+//updateArray(dataset1)
 
  // On click, update with new data
  function updateArray(params){
- d3.select("h4")
-     .on("click", function() {
+
          var numValues = params.length; // Get original dataset's length
          //dataset = []; // Initialize empty array
        //dataset= [{"x": -5, "y": 63, "name": "Matt"}, {"x": 59, "y": 6, "name": "Gary"}];
@@ -192,4 +191,4 @@ dataset=params;
                  .attr("fill", "red");
 
 
-     })}
+     }
