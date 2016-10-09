@@ -37,7 +37,9 @@ const People = function() {
 				return mainPerson.scores[person.id]--;
 			});
 		});
-	} this.movePeople = () => { const listCopy = JSON.parse(JSON.stringify(this.list));
+	}
+	this.movePeople = () => {
+		const listCopy = JSON.parse(JSON.stringify(this.list));
 
 		listCopy.forEach(mainPerson => {
 			const xVec = listCopy.reduce((prev, person) => prev + person.x - mainPerson.x, 0);
@@ -54,7 +56,7 @@ const People = function() {
 			this.list[mainPerson.id].y = (scoreSum * yVec) / (numOthers*numOthers);
 			console.log('movePeople X: ', this.list[mainPerson.id].x);
 		});
-	}
+	};
 	this.getPeople = () => {
 		console.log(this.list);
 		return this.list.map(person => {
