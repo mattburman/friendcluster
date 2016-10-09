@@ -11,6 +11,7 @@ const People = function() {
 	}
 	this.displayPeople = () => console.log(this.list);
 	this.changeChoice = (id, response) => {
+		console.log(`id: ${id}, this.list.length: ${this.list.length});
 		this.list[id].addRoundResponse(response);
 	};
 	this.addRandomResponses = () => {
@@ -36,9 +37,7 @@ const People = function() {
 				return mainPerson.scores[person.id]--;
 			});
 		});
-	}
-	this.movePeople = () => {
-		const listCopy = JSON.parse(JSON.stringify(this.list));
+	} this.movePeople = () => { const listCopy = JSON.parse(JSON.stringify(this.list));
 
 		listCopy.forEach(mainPerson => {
 			const xVec = listCopy.reduce((prev, person) => prev + person.x - mainPerson.x, 0);
