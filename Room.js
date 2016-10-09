@@ -19,7 +19,7 @@ const Room = function(name, wss) {
 			this.people.addScoresToLastResponses();
 			this.people.movePeople();
 			const people = this.people.getPeople();
-			wss.clients.forEach(client => client.send(`{ "room": "${this.name}", "ev": "refresh", "q": "${questions[q%nQuestions]}", "people": ${JSON.stringify(people)}}}`));
+			wss.clients.forEach(client => client.send(`{ "room": "${this.name}", "ev": "refresh", "q": "${questions[q%nQuestions]}", "people": ${JSON.stringify(people)}}`));
 		},
 		3000
 	);
