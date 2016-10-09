@@ -35,14 +35,17 @@ app.post('/:room/join', function(req, res) {
 	res.status(200).send({ id: id})
 });
 
+const ROOM = 'defaultRoom';
+
 app.get('/:room', (req, res) => {
-	if (!rooms[req.params.room]) rooms[req.params.room] = new Room(req.params.room, wss);
-	console.log(rooms[req.params.room]);
+
+//	if (!rooms[req.params.room]) rooms[req.params.room] = new Room(req.params.room, wss);
+	if (!rooms[ROOM]) rooms[ROOM] = new Room(ROOM, wss);
 	res.sendFile(path.join(__dirname, './public', 'index.html'));
 });
 
 app.post('/:room/choice', (req, res) => {
-	rooms[req.params.room].changeChoice(req.body.id, req.body.choice);
+	rooms[ROOM].changeChoice(req.body.id, req.body.choice);
 	res.status(200).send({ success: true });
 });
 
