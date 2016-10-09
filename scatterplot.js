@@ -9,12 +9,16 @@ var dataset = []; // Initialize empty array
 
       dataset.push([newNumber1, newNumber2]); // Add new number to array
   }*/
+dataset = [1, 2, 3, 5, 6, 0];
+var names=["hello", "mummy", "hello"]
+addArray(dataset);
 
 function addArray(params) {
-    var numDataPoints = params.length / 2;
-    for (i = 0; i < numDataPoints; i++) {
+    var numDataPoints = params.length;
+    for (i = 0; i < numDataPoints; i += 2) {
         dataset.push([params[i], params[i + 1]]);
-    } }
+    }
+}
 
 
 
@@ -67,31 +71,23 @@ var circles = svg.selectAll("circle")
         return yScale(d[1]);
     })
     .attr("r", 2); // radius
-    //Create the SVG Viewport
-     var svgContainer = d3.select("body").append("svg")
-                                          .attr("width",200)
-                                          .attr("height",200);
 
-//Create attributes
-var text = svgContainer.selectAll("text")
-    .data(dataset);
-
-
-//Add SVG Text Element Attributes
-var textLabels = text
+var text = svg.selectAll("text")
+    .data(dataset)
+    .enter()
+    .append("text")
+    .text(function(d) {
+        return (d[0]) + "," + (d[1] + names[0]);
+    })
     .attr("x", function(d) {
-        return d.cx;
+        return xScale(d[0]);
     })
     .attr("y", function(d) {
-        return d.cy;
-    })
-    .text(function(d) {
-        return "( " + d.cx + ", " + d.cy + " )";
+        return yScale(d[1]);
     })
     .attr("font-family", "sans-serif")
-    .attr("font-size", "20px")
+    .attr("font-size", "11px")
     .attr("fill", "red");
-
 // Add to X axis
 svg.append("g")
     .attr("class", "x axis")
@@ -152,6 +148,8 @@ d3.select("h4")
                     .attr("r", 2); // Change radius
             });
 
+
+
         // Update X Axis
         svg.select(".x.axis")
             .transition()
@@ -163,4 +161,24 @@ d3.select("h4")
             .transition()
             .duration(100)
             .call(yAxis);
-    });
+
+            svg.selectAll("text")
+                .data(dataset)
+                .transition()
+                .duration(1000)
+
+                .text(function(d) {
+                    return (d[0]) + "," + (d[1]);
+                })
+                .attr("x", function(d) {
+                    return xScale(d[0]);
+                })
+                .attr("y", function(d) {
+                    return yScale(d[1]);
+                })
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "11px")
+                .attr("fill", "red");
+
+
+    })
