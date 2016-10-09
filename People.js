@@ -43,18 +43,20 @@ const People = function() {
 		const listCopy = JSON.parse(JSON.stringify(this.list));
 
 		listCopy.forEach(mainPerson => {
-			const xVec = listCopy.reduce((prev, person) => prev + person.x - mainPerson.x, 0);
-			const yVec = listCopy.reduce((prev, person) => prev + person.y - mainPerson.y, 0);
+//			const xVec = listCopy.reduce((prev, person) => prev + person.x - mainPerson.x, 0);
+//			const yVec = listCopy.reduce((prev, person) => prev + person.y - mainPerson.y, 0);
+				const xVec = listCopy.reduce((prev, person) => mainPerson.scores[person.id]*(person.x - mainPerson.x), 0);
+				const yVec = listCopy.reduce((prev, person) => mainPerson.scores[person.id]*(person.y - mainPerson.y), 0);
 
-			const scoreSum = listCopy.reduce((prev, person) => prev + mainPerson.scores[person.id], 0);
+//			const scoreSum = listCopy.reduce((prev, person) => prev + mainPerson.scores[person.id], 0);
 
 			const numOthers = listCopy.length - 1;
 			console.log("numOthers: ", numOthers);
 			console.log('xVec: ', xVec);
 			console.log('scoreSum: ', scoreSum);
 			if (numOthers === 0) return;
-			this.list[mainPerson.id].x = (scoreSum * xVec) / (numOthers*numOthers);
-			this.list[mainPerson.id].y = (scoreSum * yVec) / (numOthers*numOthers);
+			this.list[mainPerson.id].x =  xVec / numOthers;
+			this.list[mainPerson.id].y = yVec / numOthers;
 			console.log('movePeople X: ', this.list[mainPerson.id].x);
 		});
 	};
