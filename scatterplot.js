@@ -1,13 +1,5 @@
-< h2 > D3 Scatterplot < /h2> <
-    p > This is a data visualization using transitions with a scatterplot < /p> <
-    h4 > Click on this text to update chart with new values < /h4> <
-    h3 > < /h3>
-
-<!-- Begin D3 Javascript -->
-<
-script type = "text/javascript" >
-    // Setup data
-    var dataset = []; // Initialize empty array
+// Setup data
+var dataset = []; // Initialize empty array
 //var numDataPoints = 15; // Number of dummy data points
 //var maxRange = Math.random() * 1000; // Max range of new values
 /*  for (var i = 0; i < numDataPoints; i++) {
@@ -22,10 +14,10 @@ function addArray(params) {
     var numDataPoints = params.length / 2;
     for (i = 0; i < numDataPoints; i++) {
         dataset.push([params[i], params[i + 1]]);
-    } * /
+    } }
 
 
-}
+
 
 // Setup settings for graphic
 var canvas_width = 500;
@@ -75,6 +67,10 @@ var circles = svg.selectAll("circle")
         return yScale(d[1]);
     })
     .attr("r", 2); // radius
+    //Create the SVG Viewport
+     var svgContainer = d3.select("body").append("svg")
+                                          .attr("width",200)
+                                          .attr("height",200);
 
 //Create attributes
 var text = svgContainer.selectAll("text")
