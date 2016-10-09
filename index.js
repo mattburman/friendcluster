@@ -14,6 +14,8 @@ const WebSocketServer = require('ws').Server;
 const wss = new WebSocketServer({ port: 8085 });
 
 const rooms = {};
+const ROOM = 'defaultRoom';
+const DEFAULT_ROOM = new Room(ROOM, wss)
 
 wss.on('connection', ws => {
 	ws.on('message', data => {
@@ -24,6 +26,7 @@ wss.on('connection', ws => {
 });
 
 app.post('/:room/join', function(req, res) {
+	/*
 	console.log(req.body);
 	console.log(`[${req.params.room}][${req.body.name}]`);
 	if (!rooms[req.params.room]) rooms[req.params.room] = new Room(req.params.room, wss);
@@ -32,20 +35,22 @@ app.post('/:room/join', function(req, res) {
 	console.log(`rooms[req.params.room]: ${rooms[req.params.room]}`);
 	const id = rooms[req.params.room].addPerson(req.body.name);
 	console.log('ID@@: ', id);
+	*/
+	const id = DEFAULT_ROOM.addPerson(req.body.name);
 	res.status(200).send({ id: id})
 });
-
-const ROOM = 'defaultRoom';
 
 app.get('/:room', (req, res) => {
 
 //	if (!rooms[req.params.room]) rooms[req.params.room] = new Room(req.params.room, wss);
-	if (!rooms[ROOM]) rooms[ROOM] = new Room(ROOM, wss);
+//	if (!rooms[ROOM]) rooms[ROOM] = new Room(ROOM, wss);
 	res.sendFile(path.join(__dirname, './public', 'index.html'));
 });
 
 app.post('/:room/choice', (req, res) => {
-	rooms[ROOM].changeChoice(req.body.id, req.body.choice);
+//	if (!rooms[ROOM])
+//	rooms[ROOM].changeChoice(req.body.id, req.body.choice);
+	ROOM.changeChoice(req.body.id, req.body.choice);
 	res.status(200).send({ success: true });
 });
 
