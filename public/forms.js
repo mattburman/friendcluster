@@ -76,9 +76,8 @@ UI.submitNameBtn.click(function(ev) {
 
 			conn.ws.onmessage = function(msg) {
 				console.log(msg);
-				msg.data = JSON.parse(msg.data);
-				console.log(msg.data.people);
-				updateArray(msg.data.people);
+				console.log(JSON.parse(msg.data).people);
+				updateArray(JSON.parse(msg.data).people);
 			}
 		};
 
