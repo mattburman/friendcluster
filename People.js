@@ -4,16 +4,23 @@ const Person = require('./Person.js');
 const People = function() {
 	this.list = [];
 
-	this.addPerson = person => this.list.push(person);
+	this.addPerson = (name, id) => {
+		const person = new Person(name, id, Math.random(), Math.random());
+		console.log(person.x, person.y);
+		this.list.push(person);
+	}
 	this.displayPeople = () => console.log(this.list);
 	this.changeChoice = (id, response) => {
-		this.list[id].changeResponse(response);
+		this.list[id].addRoundResponse(response);
 	};
 	this.addRandomResponses = () => {
 		this.list.forEach(person => {
 			const choice = OPTIONS[Math.floor(Math.random()*OPTIONS.length)];
 			person.responses.push(choice);
 		});
+	};
+	this.addRoundResponses = () => {
+		this.list.forEach(person => person.addResponse());
 	};
 	this.addScoresToLastResponses = () => {
 		this.list.forEach(mainPerson => {
@@ -40,10 +47,25 @@ const People = function() {
 			const scoreSum = listCopy.reduce((prev, person) => prev + mainPerson.scores[person.id], 0);
 
 			const numOthers = listCopy.length - 1;
+			console.log("numOthers: ", numOthers);
+			console.log('xVec: ', xVec);
+			console.log('scoreSum: ', scoreSum);
+			if (numOthers === 0) return;
 			this.list[mainPerson.id].x = (scoreSum * xVec) / (numOthers*numOthers);
 			this.list[mainPerson.id].y = (scoreSum * yVec) / (numOthers*numOthers);
+			console.log('movePeople X: ', this.list[mainPerson.id].x);
 		});
-	};
+	}
+	this.getPeople = () => {
+		console.log(this.list);
+		return this.list.map(person => {
+			console.log("person: " + JSON.stringify(person));
+			console.log("name: " + person.name);
+			return {
+				x: person.x, y: person.y, name: person.name
+			}
+	});
+	}
 }
 
 module.exports = People;

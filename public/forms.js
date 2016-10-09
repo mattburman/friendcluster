@@ -14,18 +14,22 @@ console.log('forms');
 
 const conn = {};
 
+const ROOM = window.location.pathname.split("/")[1];
+
 UI.submitNameBtn.click(function(ev) {
 	console.log('click');
+	console.log(UI.field.val());
 	$.ajax({
-			url: "/" + window.location.pathname.split("/")[1] + "/join",
+			url: "/" + ROOM + "/join",
 			type: "POST",
 			headers: {
 					"Content-Type": "application/json",
 			},
 			contentType: "application/json",
 			data: JSON.stringify({
-					"name": UI.field.value
-			})
+				"name": UI.field.val()
+			}),
+			dataType: "json"
 	})
 	.done(function(data, textStatus, jqXHR) {
 		console.log("HTTP Request Succeeded: " + jqXHR.status);
@@ -36,22 +40,32 @@ UI.submitNameBtn.click(function(ev) {
 
 		conn.ws = new WebSocket('ws://' + location.hostname + ':8085');
 
-		conn.ws.onconnect = function(msg) {
+		console.log(conn.ws);
+		conn.ws.onopen = function() {
+			console.log('connected');
+			function Choice (choice) {
+				this.choice = choice;
+				this.id = id;
+				this.room = ROOM;
+			}
 			UI.yesBtn.click(function(ev) {
+				console.log('yes');
 				UI.yesBtn.addClass("selected");
-				conn.ws.send(JSON.stringify({ choice:"yes", id: id }));
+				conn.ws.send(JSON.stringify(new Choice('yes')));
 				UI.noBtn.removeClass("selected");
 				UI.idkBtn.removeClass("selected");
 			});
 			UI.noBtn.click(function(ev) {
+				console.log('no');
 				UI.noBtn.addClass("selected");
-				conn.ws.send(JSON.stringify({ choice:"no", id: id }));
+				conn.ws.send(JSON.stringify(new Choice('no')));
 				UI.yesBtn.removeClass("selected");
 				UI.idkBtn.removeClass("selected");
 			});
-			UI.idkBtn.addClass(function(ev) {
+			UI.idkBtn.click(function(ev) {
+				console.log('idk');
 				UI.idkBtn.addClass("selected");
-				conn.ws.send(JSON.stringify({ choice:"idk", id: id }));
+				conn.ws.send(JSON.stringify(new Choice('idk')));
 				UI.noBtn.removeClass("selected");
 				UI.yesBtn.removeClass("selected");
 			});
@@ -60,7 +74,7 @@ UI.submitNameBtn.click(function(ev) {
 				console.log(msg);
 				msg = JSON.parse(msg.data);
 			}
-		}
+		};
 
 	})
 	.fail(function(jqXHR, textStatus, errorThrown) {

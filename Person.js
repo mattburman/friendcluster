@@ -1,15 +1,24 @@
-const Person = function(id, x, y) {
+const Person = function(name, id, x, y) {
+	console.log(name);
+	console.log(id);
+	console.log(x);
+	console.log(y);
+	this.name = name;
 	this.id = id;
 	this.x = x;
 	this.y = y;
 
+	console.log('X: ', this.x);
+	console.log('Y: ', this.y);
 	this.scores = {};
 	this.responses = [];
 	this.response = undefined;
-	this.addResponse = (response) => {
-		if (response === true || response === false) responses.push(response);
-		else responses.push(undefined);
-		this.response = undefined;
+	this.addRoundResponse = response => {
+		if (response === true || response === false) this.response = response;
+		else this.response = undefined;
+	};
+	this.addResponse = () => {
+		this.responses.push(this.response);
 	};
 }
 

@@ -8,15 +8,18 @@ const Room = function(name, wss) {
 	let id = -1;
 	this.name = name;
 	this.people = new People();
-	this.addPerson = () => this.people.addPerson(++id, Math.random(), Math.random()) && id;
+	this.addPerson = name => this.people.addPerson(name, ++id, Math.random(), Math.random()) && id;
 	this.changeChoice = this.people.changeChoice;
 
 	let q = 1;
-	setInterval(
-		function() {
+	setInterval(() => {
 			console.log('interval' + q);
 			q++;
-			wss.clients.forEach(client => client.send(`{ "room": "${this.name}", "ev": "refresh", "q": "${questions[q%nQuestions]}"}`));
+			this.people.addRoundResponses();
+			this.people.addScoresToLastResponses();
+			this.people.movePeople();
+			const people = this.people.getPeople();
+			wss.clients.forEach(client => client.send(`{ "room": "${this.name}", "ev": "refresh", "q": "${questions[q%nQuestions]}", "people": ${JSON.stringify(people)}}}`));
 		},
 		3000
 	);

@@ -13,18 +13,21 @@ app.engine('html', require('ejs').renderFile);
 const WebSocketServer = require('ws').Server;
 const wss = new WebSocketServer({ port: 8085 });
 
+const rooms = {};
+
 wss.on('connection', ws => {
 	ws.on('message', data => {
+		data = JSON.parse(data);
 		console.log(`[${data.id}][${data.choice}]`);
+		rooms[data.room].changeChoice(data.id, data.choice);
 	});
-})
-
-const rooms = {};
+});
 
 app.post('/:room/join', function(req, res) {
 	console.log(req.body);
 	console.log(`[${req.params.room}][${req.body.name}]`);
 	if (!rooms[req.params.room]) rooms[req.params.room] = new Room(req.params.room, wss);
+	console.log('req.body: ' + JSON.stringify(req.body));
 	res.status(200).send({ id: rooms[req.params.room].addPerson(req.body.name) })
 });
 
