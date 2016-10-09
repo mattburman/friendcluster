@@ -21,7 +21,7 @@ UI.submitNameBtn.click(function(ev) {
 	console.log('click');
 	console.log(UI.field.val());
 	$.ajax({
-		url: "/" + ROOM + "/join",
+		url: "http://" + window.location.hostname + URL,
 			type: "POST",
 			headers: {
 					"Content-Type": "application/json",
