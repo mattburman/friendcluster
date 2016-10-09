@@ -8,7 +8,11 @@ const Room = function(name, wss) {
 	let id = -1;
 	this.name = name;
 	this.people = new People();
-	this.addPerson = name => this.people.addPerson(name, ++id, Math.random(), Math.random()) && id;
+	id += 1;
+	this.addPerson = name => {
+		this.people.addPerson(name, id, Math.random(), Math.random());
+		return id;
+	}
 	this.changeChoice = this.people.changeChoice;
 
 	let q = 1;
