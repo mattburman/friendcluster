@@ -1,8 +1,4 @@
 const Person = function(name, id, x, y) {
-	console.log(name);
-	console.log(id);
-	console.log(x);
-	console.log(y);
 	this.name = name;
 	this.id = id;
 	this.x = x;

@@ -2,6 +2,8 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="/style.css">
+    <!-- Load D3 from site -->
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 	</head>
 	<body>
 			<div id="welcome-wrapper">
@@ -13,12 +15,20 @@
 			</div>
 			<div id="voting-wrapper">
 				<h1>Choose.</h1>
+				<h2></h2>
 				<button id="yes">Yes</button>
 				<button id="no">No</button>
 				<button id="idk" class="selected">I don't know</button>
 			</div>
+			<div id="scatter">
+
+				<h2>User input values</h2>
+				<p>Welcome to Friend Cluster interface</p>
+				<h4>File will update with each new question</h4>
+			</div>
 			<script src="/jquery-3.1.1.min.js"></script>
 			<script src="/forms.js"></script>
+			<script src="/scatterplot.js"></script>
 	</body>
 
 </html>
